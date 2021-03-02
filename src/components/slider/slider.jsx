@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Content from "./content/content";
 import "./slider.scss";
 
 const Slider = ({ imgsArr }) => {
 
-  const IMG_WIDTH = 1000;
   const [start, setStart] = useState(0);
   const [state, setState] = useState({
     currentIndex: 0,
@@ -12,6 +11,23 @@ const Slider = ({ imgsArr }) => {
     transitionDuration: 0.5,
   })
   
+  const divRef = useRef();
+  const resizeRef = useRef();
+
+  let [getWidth, setWidth] = useState(1000);
+  useEffect(() =>{
+    resizeRef.current = handleResize
+  })
+  useEffect(() => {
+     const resize = () => {
+       setWidth(divRef.current.clientWidth);
+       resizeRef.current()
+    }
+    const resizeEnd = window.addEventListener("resize", resize)
+    return () => {
+    window.removeEventListener("resize", resizeEnd);
+    }
+},[])
   const { currentIndex, offset, transitionDuration } = state;
 
   const onTouchStart = (e) => {
@@ -33,8 +49,8 @@ const Slider = ({ imgsArr }) => {
     if (nextOffset <= 0) {
       nextOffset = 0;
     }
-    if (nextOffset > maxLength * IMG_WIDTH) {
-      nextOffset = maxLength * IMG_WIDTH;
+    if (nextOffset > maxLength * getWidth) {
+      nextOffset = maxLength * getWidth;
     }
     setState({
       ...state,
@@ -44,17 +60,17 @@ const Slider = ({ imgsArr }) => {
   };
 
   const onOffsetEnd = () => {
-    const finalPosition = offset / IMG_WIDTH;
+    const finalPosition = offset / getWidth;
     const finalPart = finalPosition % 1;
     const finalIndex = finalPosition - finalPart;
-    const deltaInteger = finalIndex - currentIndex;
+    const deltaIndex = finalIndex - currentIndex;
     let nextIndex = finalIndex;
-    if (deltaInteger >= 0) {
+    if (deltaIndex >= 0) {
       if (finalPart >= 0.1) {
         nextIndex += 1;
       }
-    } else if (deltaInteger < 0) {
-      nextIndex = currentIndex - Math.abs(deltaInteger);
+    } else if (deltaIndex < 0) {
+      nextIndex = currentIndex - Math.abs(deltaIndex);
       if (finalPart > 0.9) {
         nextIndex += 1;
       }
@@ -64,11 +80,11 @@ const Slider = ({ imgsArr }) => {
   const moveTo = (index, duration) => {
     setState({
       currentIndex: index,
-      offset: index * IMG_WIDTH,
+      offset: index * getWidth,
       transitionDuration: `${duration}`,
     });
     const moveTimeout = setTimeout(() => {
-      setState({ transitionDuration: 0 });
+      setState({...state, transitionDuration: 0 });
     }, duration * 100);
     clearTimeout(moveTimeout);
   };
@@ -78,10 +94,13 @@ const Slider = ({ imgsArr }) => {
   const handleForward = () => {
     moveTo(currentIndex - 1, 0.5);
   };
-
+  const handleResize = () => {
+    setState({ ...state, offset: getWidth, transitionDuration: 0 });
+  };
   return (
     <div
       className="slider"
+      ref={divRef}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
@@ -89,7 +108,7 @@ const Slider = ({ imgsArr }) => {
       <Content
         translate={offset}
         transition={transitionDuration}
-        width={IMG_WIDTH * imgsArr.length}
+        width={getWidth * imgsArr.length}
         arr={imgsArr}
       ></Content>
 

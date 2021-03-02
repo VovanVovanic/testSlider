@@ -1,10 +1,11 @@
 .slider{
-    position: relative;
-    height: 80vh;
-    width: 80vw;
-    margin: 0 auto;
-  overflow: hidden; 
+  position: relative;
+  height: 80vh;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
 }
+
 %arrows {
   position: absolute;
   top: 50%;
