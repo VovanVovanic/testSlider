@@ -4,6 +4,9 @@
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
+  img{
+    object-fit: cover;
+  }
 }
 
 %arrows {
