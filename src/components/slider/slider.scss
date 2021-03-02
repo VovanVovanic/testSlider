@@ -1,0 +1,24 @@
+.slider{
+    position: relative;
+    height: 80vh;
+    width: 80vw;
+    margin: 0 auto;
+  overflow: hidden; 
+}
+%arrows {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7%;
+  height: 90%;
+  background: none;
+  cursor: pointer;
+}
+.goLeft {
+  left: 0;
+  @extend %arrows;
+}
+.goRight {
+  right: 0;
+  @extend %arrows;
+}
