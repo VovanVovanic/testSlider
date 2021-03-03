@@ -22,7 +22,6 @@ const Slider = ({ imgsArr }) => {
       let e = Math.random() * (arr.length - size);
       let r = e.toFixed();
       let copy = arr[r];
-      console.log(copy);
       arr.push(copy);
     }
     return Array(Math.ceil(array.length / size))
@@ -33,9 +32,11 @@ const Slider = ({ imgsArr }) => {
 
   const [activeBtn, setActiveBtn] = useState(1);
   const onArrayHandle = (id) => {
+    setState({ currentIndex:0, offset: 0, transitionDuration:0,  });
     setActiveBtn(id)
     let res = id === 2 ? switcher(imgsArr, id) : switcher(imgsArr, id).flat()
     setArr(res)
+
   }
 
   const divRef = useRef();
