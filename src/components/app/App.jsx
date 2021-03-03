@@ -15,9 +15,15 @@ const imgArr = [
 ];
 
 function App() {
+/////this script below allows you to export all images from the folder into an array
+  function importAllImages(r) {
+    return r.keys().map(r);
+  }
+  let res = importAllImages(require.context(`../images`, false, /\.(png|jpe?g|svg)$/))
+/////and pass this array into Slider props
   return (
     <div className='container'>
-      <Slider imgsArr={imgArr} /> 
+      <Slider imgsArr={imgArr} />
     </div>
   );
 }

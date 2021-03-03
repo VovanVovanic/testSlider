@@ -16,26 +16,26 @@ const Slider = ({ imgsArr }) => {
   })
 
 
-const switcher = (array, size) => {
-  let i = array.length % size;
-  if (i) {
-    let e = Math.random() * (arr.length - size);
-    let r = e.toFixed();
-    let copy = arr[r];
-    console.log(copy);
-    arr.push(copy);
-  }
-  return Array(Math.ceil(array.length / size))
-    .fill()
-    .map((_, index) => index * size)
-    .map((begin) => array.slice(begin, begin + size));
-};
+  const switcher = (array, size) => {
+    let i = array.length % size;
+    if (i) {
+      let e = Math.random() * (arr.length - size);
+      let r = e.toFixed();
+      let copy = arr[r];
+      console.log(copy);
+      arr.push(copy);
+    }
+    return Array(Math.ceil(array.length / size))
+      .fill()
+      .map((_, index) => index * size)
+      .map((begin) => array.slice(begin, begin + size));
+  };
 
-const [activeBtn, setActiveBtn] = useState(1);
+  const [activeBtn, setActiveBtn] = useState(1);
   const onArrayHandle = (id) => {
     setActiveBtn(id)
     let res = id === 2 ? switcher(imgsArr, id) : switcher(imgsArr, id).flat()
-   setArr(res)
+    setArr(res)
   }
 
   const divRef = useRef();
@@ -71,7 +71,7 @@ const [activeBtn, setActiveBtn] = useState(1);
   };
 
   const onOffset = (dist) => {
-    const maxLength = imgsArr.length - 1;
+    const maxLength = arr.length - 1;
     let nextOffset = offset + dist;
     if (nextOffset <= 0) {
       nextOffset = 0;
@@ -123,7 +123,7 @@ const [activeBtn, setActiveBtn] = useState(1);
     moveTo(currentIndex - 1, 0.5);
   };
   const handleResize = () => {
-    setState({ ...state, offset: getWidth, transitionDuration: 0 });
+    setState({ ...state, offset: getWidth * currentIndex, transitionDuration: 0 });
   };
   const toDefineSlide = (index) => {
     moveTo(index, 1.5)
