@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import Content from "./content/content";
+import Arrow from '../arrows/arrows'
 import "./slider.scss";
 
 const Slider = ({ imgsArr }) => {
@@ -14,7 +15,7 @@ const Slider = ({ imgsArr }) => {
   const divRef = useRef();
   const resizeRef = useRef();
 
-  let [getWidth, setWidth] = useState(1000);
+  let [getWidth, setWidth] = useState(1200);
   useEffect(() =>{
     resizeRef.current = handleResize
   })
@@ -92,6 +93,7 @@ const Slider = ({ imgsArr }) => {
     moveTo(currentIndex + 1, 0.5);
   };
   const handleForward = () => {
+    console.log('forward');
     moveTo(currentIndex - 1, 0.5);
   };
   const handleResize = () => {
@@ -113,18 +115,18 @@ const Slider = ({ imgsArr }) => {
       ></Content>
 
       {currentIndex !== imgsArr.length - 1 && (
-        <button className="goLeft" onClick={handleBack}>
+        <Arrow variant={"left"} handleMove={handleBack}>
           back
-        </button>
+        </Arrow>
       )}
 
       {currentIndex !== 0 && (
-        <button className="goRight" onClick={handleForward}>
-          forward
-        </button>
+        <Arrow variant={"right"} handleMove={handleForward} />
       )}
     </div>
   );
 };
 
 export default Slider;
+
+

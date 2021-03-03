@@ -4,16 +4,14 @@ import "./App.scss";
 import Slider from '../slider/slider'
 
 const imgArr = [
-  "https://images.unsplash.com/photo-1500622944204-b135684e99fd?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1601&q=80",
-  "https://images.unsplash.com/photo-1431411207774-da3c7311b5e8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-  "https://images.unsplash.com/photo-1485081669829-bacb8c7bb1f3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-  "https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?",
-  "https://images.unsplash.com/photo-1500622944204-b135684e99fd?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1601&q=80",
-  "https://images.unsplash.com/photo-1431411207774-da3c7311b5e8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-  "https://images.unsplash.com/photo-1485081669829-bacb8c7bb1f3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-  "https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1349&q=80",
-  "https://images.unsplash.com/photo-1444465693019-aa0b6392460d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-  "https://images.unsplash.com/photo-1500470375228-7e498a284287?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+  "https://images.pexels.com/photos/262325/pexels-photo-262325.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+  "https://images.pexels.com/photos/3016350/pexels-photo-3016350.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+  "https://images.pexels.com/photos/1070970/pexels-photo-1070970.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+  "https://images.pexels.com/photos/733205/pexels-photo-733205.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+  "https://images.pexels.com/photos/6623924/pexels-photo-6623924.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+  "https://images.pexels.com/photos/5507235/pexels-photo-5507235.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+  "https://images.pexels.com/photos/6732764/pexels-photo-6732764.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+  "https://images.pexels.com/photos/2331019/pexels-photo-2331019.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
 ];
 
 function App() {
