@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Content from "./content/content";
 import Arrow from '../arrows/arrows'
+import Navigation from '../navigation/navigation'
 import "./slider.scss";
 
 const Slider = ({ imgsArr }) => {
@@ -99,6 +100,9 @@ const Slider = ({ imgsArr }) => {
   const handleResize = () => {
     setState({ ...state, offset: getWidth, transitionDuration: 0 });
   };
+  const toDefineSlide = (slide, index) => {
+    moveTo(index, 1.5)
+  }
   return (
     <div
       className="slider"
@@ -123,6 +127,11 @@ const Slider = ({ imgsArr }) => {
       {currentIndex !== 0 && (
         <Arrow variant={"right"} handleMove={handleForward} />
       )}
+      <Navigation
+        arr={imgsArr}
+        toDefineSlide={toDefineSlide}
+        activeSlide={currentIndex}
+      />
     </div>
   );
 };
