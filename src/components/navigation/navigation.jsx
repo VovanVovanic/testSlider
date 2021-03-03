@@ -9,7 +9,7 @@ const Navigation = ({ arr, activeSlide, toDefineSlide }) => {
         key={el}
         className={'navItem'}
         style={{ background: `${active}` }}
-        onClick={() => toDefineSlide(el, i)}
+        onClick={() => toDefineSlide(i)}
       />
     );
   });

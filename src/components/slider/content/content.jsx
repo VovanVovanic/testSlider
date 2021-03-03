@@ -2,7 +2,7 @@ import React from "react";
 import Slide from "../slide/slide";
 import "./content.scss";
 
-const Content = ({ translate, transition, width, arr }) => {
+const Content = ({ translate, transition, width, arr, amount }) => {
   return (
     <div
       className='content'
@@ -13,7 +13,7 @@ const Content = ({ translate, transition, width, arr }) => {
       }}
     >
       {arr.map((slide, i) => (
-        <Slide key={slide + i} content={slide} />
+        <Slide key={slide + i} content={slide} amount={amount}/>
       ))}
     </div>
   );

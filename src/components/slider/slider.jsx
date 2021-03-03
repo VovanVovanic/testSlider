@@ -3,33 +3,58 @@ import Content from "./content/content";
 import Arrow from '../arrows/arrows'
 import Navigation from '../navigation/navigation'
 import "./slider.scss";
+import Switcher from "../multiSlideSwitches/switcher";
 
 const Slider = ({ imgsArr }) => {
 
   const [start, setStart] = useState(0);
+  const [arr, setArr] = useState(imgsArr)
   const [state, setState] = useState({
     currentIndex: 0,
     offset: 0,
     transitionDuration: 0.5,
   })
-  
+
+
+const switcher = (array, size) => {
+  let i = array.length % size;
+  if (i) {
+    let e = Math.random() * (arr.length - size);
+    let r = e.toFixed();
+    let copy = arr[r];
+    console.log(copy);
+    arr.push(copy);
+  }
+  return Array(Math.ceil(array.length / size))
+    .fill()
+    .map((_, index) => index * size)
+    .map((begin) => array.slice(begin, begin + size));
+};
+
+const [activeBtn, setActiveBtn] = useState(1);
+  const onArrayHandle = (id) => {
+    setActiveBtn(id)
+    let res = id === 2 ? switcher(imgsArr, id) : switcher(imgsArr, id).flat()
+   setArr(res)
+  }
+
   const divRef = useRef();
   const resizeRef = useRef();
 
   let [getWidth, setWidth] = useState(1200);
-  useEffect(() =>{
+  useEffect(() => {
     resizeRef.current = handleResize
   })
   useEffect(() => {
-     const resize = () => {
-       setWidth(divRef.current.clientWidth);
-       resizeRef.current()
+    const resize = () => {
+      setWidth(divRef.current.clientWidth);
+      resizeRef.current()
     }
     const resizeEnd = window.addEventListener("resize", resize)
     return () => {
-    window.removeEventListener("resize", resizeEnd);
+      window.removeEventListener("resize", resizeEnd);
     }
-},[])
+  }, [])
   const { currentIndex, offset, transitionDuration } = state;
 
   const onTouchStart = (e) => {
@@ -86,7 +111,7 @@ const Slider = ({ imgsArr }) => {
       transitionDuration: `${duration}`,
     });
     const moveTimeout = setTimeout(() => {
-      setState({...state, transitionDuration: 0 });
+      setState({ ...state, transitionDuration: 0 });
     }, duration * 100);
     clearTimeout(moveTimeout);
   };
@@ -100,7 +125,7 @@ const Slider = ({ imgsArr }) => {
   const handleResize = () => {
     setState({ ...state, offset: getWidth, transitionDuration: 0 });
   };
-  const toDefineSlide = (slide, index) => {
+  const toDefineSlide = (index) => {
     moveTo(index, 1.5)
   }
   return (
@@ -114,11 +139,12 @@ const Slider = ({ imgsArr }) => {
       <Content
         translate={offset}
         transition={transitionDuration}
-        width={getWidth * imgsArr.length}
-        arr={imgsArr}
+        width={getWidth * arr.length}
+        arr={arr}
+        amount={activeBtn}
       ></Content>
 
-      {currentIndex !== imgsArr.length - 1 && (
+      {currentIndex !== arr.length - 1 && (
         <Arrow variant={"left"} handleMove={handleBack}>
           back
         </Arrow>
@@ -128,10 +154,11 @@ const Slider = ({ imgsArr }) => {
         <Arrow variant={"right"} handleMove={handleForward} />
       )}
       <Navigation
-        arr={imgsArr}
+        arr={arr}
         toDefineSlide={toDefineSlide}
         activeSlide={currentIndex}
       />
+      <Switcher active={activeBtn} onArrayHandle={onArrayHandle} />
     </div>
   );
 };
