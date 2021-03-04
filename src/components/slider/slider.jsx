@@ -32,7 +32,7 @@ const Slider = ({ imgsArr }) => {
 
   const [activeBtn, setActiveBtn] = useState(1);
   const onArrayHandle = (id) => {
-    setState({ currentIndex:0, offset: 0, transitionDuration:0,  });
+    setState({ currentIndex: 0, offset: 0, transitionDuration: 0, });
     setActiveBtn(id)
     let res = id === 2 ? switcher(imgsArr, id) : switcher(imgsArr, id).flat()
     setArr(res)
@@ -56,8 +56,16 @@ const Slider = ({ imgsArr }) => {
       window.removeEventListener("resize", resizeEnd);
     }
   }, [])
-  const { currentIndex, offset, transitionDuration } = state;
 
+  const { currentIndex, offset, transitionDuration } = state;
+  useEffect(() => {
+    const moveTimeout = setTimeout(() => {
+      setState({ ...state, transitionDuration: 0 });
+    }, transitionDuration * 100);
+    return () => {
+      clearTimeout(moveTimeout);
+    };
+  }, [currentIndex]);
   const onTouchStart = (e) => {
     setStart(e.nativeEvent.touches[0].clientX);
   };
@@ -111,10 +119,6 @@ const Slider = ({ imgsArr }) => {
       offset: index * getWidth,
       transitionDuration: `${duration}`,
     });
-    const moveTimeout = setTimeout(() => {
-      setState({ ...state, transitionDuration: 0 });
-    }, duration * 100);
-    clearTimeout(moveTimeout);
   };
   const handleBack = () => {
     moveTo(currentIndex + 1, 0.5);
